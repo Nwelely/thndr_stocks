@@ -1,0 +1,15 @@
+.navDiv {
+    display: flex;
+    justify-content: start; /* Align items to the start of the container */
+    align-items: center;
+    padding: 10px;
+    background-color: #001529;
+    width: 100%;
+  }
+  
+  .logo {
+    width: 100%; /* Set the width to 100% */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 150px; /* Limit the maximum width for larger screens */
+  }
+  

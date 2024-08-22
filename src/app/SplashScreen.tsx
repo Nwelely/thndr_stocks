@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import logo from '../images/logo.png'; 
+import logo from '../../public/images/Logo.png'; 
 import styles from './SplashScreen.module.css'; 
 import {Spin } from "antd"
 
