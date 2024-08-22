@@ -1,19 +1,16 @@
 'use client';
-
 import React from 'react';
-import Image from 'next/image'; 
-import './Nav.css';  
+import './Nav.css'; // Make sure you have the correct path
 
 export default function Nav() {
     return (
         <nav className="navDiv">
-      <Image
-        src="/images/Logo.png"
-        alt="Logo"
-        width={150} 
-        height={50} 
-        className="logo"       />
-      
-    </nav>
+            <img
+                src="../../public/images/Logo.png" 
+                alt="Logo"
+                width={150} 
+                className="logo" 
+            />
+        </nav>
     );
 }

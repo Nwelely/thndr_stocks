@@ -1,15 +1,12 @@
+/* Nav.css */
+
 .navDiv {
-    display: flex;
-    justify-content: start; /* Align items to the start of the container */
-    align-items: center;
-    padding: 10px;
-    background-color: #001529;
-    width: 100%;
-  }
-  
-  .logo {
-    width: 100%; /* Set the width to 100% */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 150px; /* Limit the maximum width for larger screens */
-  }
-  
+  display: flex;
+  align-items: center;
+  padding: 0 16px; /* Add padding to the left and right as needed */
+  height: 100%; /* Make sure the nav takes the full height of the Header */
+}
+
+.logo {
+  height: auto;
+}

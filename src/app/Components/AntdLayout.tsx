@@ -11,13 +11,16 @@ const headerStyle: React.CSSProperties = {
   color: '#fff',
   height: 64,
   lineHeight: '64px',
+  backgroundColor: '#001529',
 };
+
 
 const contentStyle: React.CSSProperties = {
   textAlign: 'center',
   color: '#fff',
-  backgroundColor: '#0958d9',
-  padding: '24px', 
+  backgroundColor: 'grey',
+ paddingTop: '24px',
+ paddingBottom: '15px',
   flex: 1,
 };
 
@@ -50,7 +53,9 @@ export default function AppLayout({ children, handleSearch }: AppLayoutProps) {
         <Row justify="center">
           <Col span={24}>
             <Search
-              style={{ marginBottom: 16, maxWidth: '600px' }} 
+              style={{ marginBottom: 16, maxWidth: '600px', 
+                borderRadius: '20px',
+              }} 
               placeholder="Search movies..."
               allowClear
               enterButton="Search"

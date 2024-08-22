@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider, useInfiniteQuery } from '@tanstack/re
 import { Layout, Input, Card, Col, Row, Result, Spin, Button, message } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import styles from './page.module.css';
+import Nav from './Components/Nav';
+import './Components/AntdLayout';
 
 const queryClient = new QueryClient();
 
@@ -51,28 +53,37 @@ const fetchStocks = async ({ queryKey, pageParam = 1 }: any) => {
 const AppLayout: React.FC<{ children: React.ReactNode; handleSearch: (value: string) => void }> = ({ children, handleSearch }) => {
   const { Header, Footer, Content } = Layout;
 
-  const headerStyle: React.CSSProperties = {
-    textAlign: 'center',
-    color: '#fff',
-    height: 64,
-    lineHeight: '64px',
-  };
+ 
+const headerStyle: React.CSSProperties = {
+  textAlign: 'center',
+  color: '#fff',
+  height: 64,
+  lineHeight: '64px',
+  backgroundColor: '#001529',
+};
+const contentStyle: React.CSSProperties = {
+  textAlign: 'center',
+  color: '#fff',
+  backgroundColor: 'white',
+  paddingTop: '24px',
+  paddingBottom: '15px',
+  flex: 1,
+};
 
-  const contentStyle: React.CSSProperties = {
-    textAlign: 'center',
-    color: '#fff',
-    backgroundColor: '#0958d9',
-    padding: '24px',
-    flex: 1,
-  };
+const hrStyle: React.CSSProperties = {
+  border: 'none',
+  borderTop: '2px solid #000', 
+  margin: '0', 
+};
 
-  const footerStyle: React.CSSProperties = {
-    textAlign: 'center',
-    color: 'black',
-    backgroundColor: 'white',
-    padding: '1rem',
-    boxShadow: '0 -2px 5px rgba(0, 0, 0, 0.1)',
-  };
+ 
+const footerStyle: React.CSSProperties = {
+  textAlign: 'center',
+  color: 'black',
+  backgroundColor: 'white',
+  padding: '1rem',
+  boxShadow: '0 -2px 5px rgba(0, 0, 0, 0.1)',
+};
 
   const layoutStyle: React.CSSProperties = {
     display: 'flex',
@@ -83,7 +94,7 @@ const AppLayout: React.FC<{ children: React.ReactNode; handleSearch: (value: str
   return (
     <Layout style={layoutStyle}>
       <Header style={headerStyle}>
-        
+      <Nav />
       </Header>
       <Content style={contentStyle}>
         <Row justify="center">
@@ -100,9 +111,10 @@ const AppLayout: React.FC<{ children: React.ReactNode; handleSearch: (value: str
         </Row>
         {children}
       </Content>
-      <Footer style={footerStyle}>
-        Footer
-      </Footer>
+      <Footer className="footer">
+      <hr className="footer-line" />
+      Implemented by : Nour El Welely
+    </Footer>
     </Layout>
   );
 };
@@ -162,7 +174,7 @@ const Explore: React.FC = () => {
           <Col xs={24} sm={12} md={8} lg={6} xl={6} key={`${stock.ticker}-${index}`}>
             <Card
               hoverable
-              style={{ width: 240, marginBottom: 16 }}
+              style={{ width:270, marginBottom: 20 ,boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)' }}
             >
               <Meta title={stock.name} description={stock.ticker} />
               <p>Market: {stock.market}</p>

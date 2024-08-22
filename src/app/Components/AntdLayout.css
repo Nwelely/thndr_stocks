@@ -1,0 +1,13 @@
+.footer {
+    text-align: center;
+    color: black;
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .footer-line {
+    border: none;
+    border-top: 2px solid #000; /* Line thickness and color */
+    margin: 0; /* No margin for the line */
+  }
