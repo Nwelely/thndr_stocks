@@ -1,11 +1,11 @@
-'use client';
 import React, { useRef, useState, useEffect } from 'react';
 import { QueryClient, QueryClientProvider, useInfiniteQuery } from '@tanstack/react-query';
-import { Layout, Input, Card, Col, Row, Result, Spin } from 'antd';
+import { Layout, Input, Card, Col, Row, Result, Spin, Button, message } from 'antd';
 import Meta from 'antd/es/card/Meta';
 import styles from './page.module.css';
 
-// Define your types here
+const queryClient = new QueryClient();
+
 type Ticker = {
   ticker: string;               
   name: string;              
@@ -27,9 +27,6 @@ type TickerResponse = {
   count: number;
   request_id: string;
 };
-
-// Create a QueryClient instance
-const queryClient = new QueryClient();
 
 const fetchStocks = async ({ queryKey, pageParam = 1 }: any) => {
   const searchTerm = queryKey[0];
@@ -86,7 +83,7 @@ const AppLayout: React.FC<{ children: React.ReactNode; handleSearch: (value: str
   return (
     <Layout style={layoutStyle}>
       <Header style={headerStyle}>
-        {/* Add your Nav component or content here */}
+        
       </Header>
       <Content style={contentStyle}>
         <Row justify="center">
@@ -112,6 +109,8 @@ const AppLayout: React.FC<{ children: React.ReactNode; handleSearch: (value: str
 
 const Explore: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [lastRequestTime, setLastRequestTime] = useState<number>(0);
+  const [requestPending, setRequestPending] = useState<boolean>(false);
   const listInnerRef = useRef<HTMLDivElement | null>(null);
 
   const {
@@ -138,7 +137,20 @@ const Explore: React.FC = () => {
   });
 
   const handleSearch = (value: string) => {
+    const currentTime = Date.now();
+    if (currentTime - lastRequestTime < 60000) {
+      message.error('Only one request per minute allowed. Please try again later.');
+      return;
+    }
+
     setSearchTerm(value || "");
+    setLastRequestTime(currentTime);
+    setRequestPending(true);
+  };
+
+  const handleRetry = () => {
+    setLastRequestTime(Date.now() - 60000);
+    setRequestPending(false);
   };
 
   const renderPosts = () => {
@@ -188,7 +200,7 @@ const Explore: React.FC = () => {
     <AppLayout handleSearch={handleSearch}>
       <div
         ref={listInnerRef}
-        style={{ height: "600px", overflow: "hidden" }} // Hide scrollbars
+        style={{ height: "600px", overflow: "hidden" }} 
       >
         {isLoading ? (
           <Spin />
@@ -199,6 +211,7 @@ const Explore: React.FC = () => {
         ) : (
           renderPosts()
         )}
+        {requestPending }
       </div>
     </AppLayout>
   );
